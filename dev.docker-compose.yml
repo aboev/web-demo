@@ -1,0 +1,34 @@
+version: '2'
+
+services:
+    nginx: 
+        restart: unless-stopped
+        container_name: demo_nginx
+        build:
+            context: .
+            dockerfile: ./Dockerfile.nginx
+        ports:
+            - 80:80
+        volumes:
+            - static_volume:/app/backend/server/django_static
+            - ./django_project/media:/app/backend/server/media
+            - ./nginx/development:/etc/nginx/conf.d
+
+    rmq:
+        image: rabbitmq:3.10-management
+        restart: always
+        container_name: demo_rmq
+        environment:
+          - RABBITMQ_DEFAULT_USER=${RMQ_USER}
+          - RABBITMQ_DEFAULT_PASS=${RMQ_PASS}
+        volumes:
+          - rabbitmq_data_volume:/var/lib/rabbitmq/
+        ports:
+          - 1234:15672
+          - 5671-5672:5671-5672
+        env_file:
+            - ./.env
+
+volumes:
+    static_volume: {}
+    rabbitmq_data_volume: {}

@@ -1,0 +1,9 @@
+# Misc
+venv
+nohup.out
+*.log
+.DS_Store
+
+# Django
+db.sqlite3
+__pycache__

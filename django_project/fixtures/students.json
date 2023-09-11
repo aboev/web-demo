@@ -1,0 +1,50 @@
+[
+{
+    "model": "students.student",
+    "pk": 1,
+    "fields": {
+        "name": "Mark Castillo",
+        "email": "mark.castillo@example.com",
+        "document": "---",
+        "phone": "(790) 550-2323",
+        "registrationDate": "2023-08-29",
+        "photo": "/media/photo/f5bd4ecb-aaf7-4d4c-ade3-c35c289297d7.jpeg"
+    }
+},
+{
+    "model": "students.student",
+    "pk": 2,
+    "fields": {
+        "name": "Margie Marshall",
+        "email": "margie.marshall@example.com",
+        "document": "---",
+        "phone": "(522) 796-6968",
+        "registrationDate": "2023-08-29",
+        "photo": "/media/photo/5fad3cb0-e7c2-4074-a869-1502a8c517d3.jpeg"
+    }
+},
+{
+    "model": "students.student",
+    "pk": 3,
+    "fields": {
+        "name": "Kylie Bishop",
+        "email": "kylie.bishop@example.com",
+        "document": "---",
+        "phone": "(732) 324-6893",
+        "registrationDate": "2023-08-30",
+        "photo": "/media/photo/93d42334-cce8-4a2e-a54f-bcff9bdf4dc7.jpeg"
+    }
+},
+{
+    "model": "students.student",
+    "pk": 4,
+    "fields": {
+        "name": "Carlos Hudson",
+        "email": "carlos.hudson@example.com",
+        "document": "---",
+        "phone": "(801) 431-1682",
+        "registrationDate": "2023-09-02",
+        "photo": "/media/photo/3c4894e5-5202-45b3-ad65-9ae4ec5e1eda.jpeg"
+    }
+}
+]

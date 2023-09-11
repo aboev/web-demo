@@ -1,0 +1,78 @@
+version: '2'
+
+services:
+    nginx: 
+        restart: unless-stopped
+        container_name: demo_nginx
+        build:
+            context: .
+            dockerfile: ./Dockerfile.nginx
+        ports:
+            - 80:80
+        volumes:
+            - static_volume:/app/backend/server/django_static
+            - media_volume:/app/backend/server/media
+            - ./nginx/production:/etc/nginx/conf.d
+        depends_on: 
+            - django
+
+    socket:
+        restart: unless-stopped
+        container_name: demo_socket
+        build:
+            context: .
+            dockerfile: Dockerfile.socket
+        depends_on:
+            - rmq
+        env_file:
+            - ./.env
+
+    django:
+        restart: unless-stopped
+        container_name: demo_django
+        build:
+            context: .
+            dockerfile: Dockerfile.django
+        volumes:
+            - static_volume:/usr/src/app/django_static
+            - media_volume:/usr/src/app/media
+        expose:
+            - 8000        
+        depends_on:
+            - postgres
+            - rmq
+        env_file:
+            - ./.env
+
+    rmq:
+        image: rabbitmq:3.10-management
+        restart: always
+        container_name: demo_rmq
+        environment:
+          - RABBITMQ_DEFAULT_USER=${RMQ_USER}
+          - RABBITMQ_DEFAULT_PASS=${RMQ_PASS}
+        volumes:
+          - rabbitmq_data_volume:/var/lib/rabbitmq/
+        ports:
+          - 1234:15672
+          - 5671-5672:5671-5672
+        env_file:
+            - ./.env
+
+    postgres:
+        image: postgres:15-alpine
+        container_name: demo_postgres
+        volumes:
+          - postgres_volume:/var/lib/postgresql/data/
+        environment:
+          - POSTGRES_USER=${POSTGRES_USER}
+          - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+          - POSTGRES_DB=${POSTGRES_DB}
+        env_file:
+            - ./.env
+
+volumes:
+    static_volume: {}
+    media_volume: {}
+    postgres_volume: {}
+    rabbitmq_data_volume: {}
