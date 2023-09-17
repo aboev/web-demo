@@ -10,7 +10,11 @@ services:
         ports:
             - 80:80
         volumes:
+<<<<<<< HEAD
+            - ./django_project/django_static:/app/backend/server/django_static
+=======
             - static_volume:/app/backend/server/django_static
+>>>>>>> 04c2c0321e325d2f41bf2df6f90741e5d0fb2861
             - ./django_project/media:/app/backend/server/media
             - ./nginx/development:/etc/nginx/conf.d
 
@@ -30,5 +34,8 @@ services:
             - ./.env
 
 volumes:
+<<<<<<< HEAD
+=======
     static_volume: {}
+>>>>>>> 04c2c0321e325d2f41bf2df6f90741e5d0fb2861
     rabbitmq_data_volume: {}
